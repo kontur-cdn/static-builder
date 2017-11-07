@@ -8,7 +8,7 @@ yarn add @skbkontur/kontur-cdn-webpack-plugin
 
 ```js
 // webpack.config.js
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var KonturCdnPlugin = require("@skbkontur/kontur-cdn-webpack-plugin");
 
 module.exports = {
     /* ... */
