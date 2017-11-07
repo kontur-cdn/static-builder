@@ -71,10 +71,9 @@ export default class KonturCdnPluginWebpack2 {
                 const resp = await fetch(this.options.cdn + '/' + bundleName + '/' + hash + '.manifest.json');
                 const text = await resp.json();
                 assets[bundleName] = this.options.cdn + '/' + bundleName + '/' + hash + '.js';
-                webpack.DllReferencePlugin.apply()
-                new webpack.DllReferencePlugin({
+                compiler.apply(new webpack.DllReferencePlugin({
                     manifest: patchManifest(text),
-                }).apply(compiler)
+                }));
             }
             this.applyHtmlWebpackPlugin(compiler, assets);
             cb();

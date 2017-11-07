@@ -6,8 +6,7 @@ const external = Object.keys(pkg.dependencies || {}).concat(Object.keys(pkg.peer
 export default {
     input: '../../src/WebpackPlugin/index.js',
     output: {
-        file: 'C:/workspace/kontur-cdn/kontur-static/node_modules/@skbkontur/kontur-cdn-webpack-plugin/index.js',
-        //file: 'index.js',
+        file: 'index.js',
         format: 'cjs',
     },
     plugins: [
