@@ -22,7 +22,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DllPlugin({
-            name: '{var-name}',
+            name: '_{var-name}',
             path: 'build/' + filename + '.manifest.json',
         }),
     ],
@@ -106,7 +106,7 @@ export class Bundle {
     getWebpackConfigTemplate(): string {
         return webpackConfigTemplate
             .replace("{libs}", this.libraries.map(x => `'${x.name}'`).join(", "))
-            .replace("{var-name}", this.getBundleHash());
+            .replace(/\{var\-name\}/gi, this.getBundleHash());
     }
 
     build(directory: string, packageManager: PackageManager): BundleBuildResult {
