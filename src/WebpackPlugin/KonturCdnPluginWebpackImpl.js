@@ -95,7 +95,7 @@ export class KonturCdnPluginWebpackImpl {
 
     buildBundleHashSync(bundleName: string): string {
         const versions = [];
-        for (const libName of Object.keys(BundleSets[bundleName])) {
+        for (const libName of Object.keys(BundleSets[bundleName][0])) {
             versions.push({
                 name: libName,
                 version: this.getLibraryVersionSync(bundleName, libName),
@@ -107,7 +107,7 @@ export class KonturCdnPluginWebpackImpl {
 
     async buildBundleHash(bundleName: string): Promise<string> {
         const versions = [];
-        for (const libName of Object.keys(BundleSets[bundleName])) {
+        for (const libName of Object.keys(BundleSets[bundleName][0])) {
             versions.push({
                 name: libName,
                 version: await this.getLibraryVersion(bundleName, libName),
