@@ -1,0 +1,8 @@
+// @flow
+
+declare module "semver" {
+    declare module.exports: {
+        satisfies(target: string, range: string): boolean,
+        compare(left: string, right: string): -1 | 0 | 1,
+    };
+}

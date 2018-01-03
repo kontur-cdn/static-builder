@@ -30,7 +30,7 @@ export default class PackageManager {
         shell.pushd(this.$targetDirectory);
         try {
             const result = shell.exec(`yarn --silent info ${moduleName} versions --json`, { silent: true });
-            return JSON.parse(result).data;
+            return JSON.parse(result.stdout).data;
         } finally {
             shell.popd();
         }

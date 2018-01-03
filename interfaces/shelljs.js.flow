@@ -1,0 +1,26 @@
+// @flow
+
+declare module "shelljs" {
+    declare type ExecOptions = {
+        silent?: boolean,
+    };
+
+    declare type ExecResult = {
+        stderr: string,
+        stdout: string,
+        code: number,
+    };
+
+    declare class Shell {
+        rm(options: string, path: string): void;
+        mkdir(options: string, path: string): void;
+        mkdir(path: string): void;
+        cp(path: string, target: string): void;
+        cp(path: Array<string>, target: string): void;
+        pushd(path: string): void;
+        popd(): void;
+        exec(command: string, options?: ExecOptions): ExecResult;
+    }
+    declare var shellStatic: Shell;
+    declare export default typeof shellStatic
+}
