@@ -5,22 +5,35 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --out-dir dist --source-maps",
-    "start": "babel-node ./src/index.js"
+    "start": "babel-node ./src/index.js",
+    "lint": "eslint src --ext .js,.jsx --report-unused-disable-directives"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
-    "flow-bin": "^0.57.3",
+    "flow-bin": "0.62.0",
     "lodash": "^4.17.4",
     "lodash-es": "^4.17.4",
     "lodash.sortby": "^4.7.0",
     "md5": "^2.2.1",
-    "rollup": "^0.50.0",
+    "rollup": "^0.53.0",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve": "^3.0.0",
     "semver": "^5.4.1",
     "shelljs": "^0.7.8"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.1.2",
+    "eslint": "^4.14.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-flowtype": "^2.40.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-prettier": "^2.4.0",
+    "eslint-plugin-react": "^7.5.1",
+    "prettier": "^1.9.2",
+    "prettier-eslint": "^8.7.0"
   }
 }

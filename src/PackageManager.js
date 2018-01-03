@@ -1,5 +1,5 @@
 // @flow
-import shell from 'shelljs';
+import shell from "shelljs";
 
 export type PackageDescription = {
     name: string,
@@ -21,7 +21,7 @@ export default class PackageManager {
 
     installPackages(packageDescriptions: Array<PackageDescription>) {
         shell.pushd(this.$targetDirectory);
-        const packagesString = packageDescriptions.map(x => x.name + '@' + x.version).reduce((x, y) => x + ' ' + y);
+        const packagesString = packageDescriptions.map(x => x.name + "@" + x.version).reduce((x, y) => x + " " + y);
         shell.exec(`yarn add ${packagesString}`);
         shell.popd();
     }

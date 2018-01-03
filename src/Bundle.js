@@ -1,9 +1,9 @@
 // @flow
-import PackageManager from './PackageManager';
-import md5 from 'md5';
-import path from 'path';
-import fs from 'fs';
-import shell from 'shelljs';
+import PackageManager from "./PackageManager";
+import md5 from "md5";
+import path from "path";
+import fs from "fs";
+import shell from "shelljs";
 
 const webpackConfigTemplate = `
 const path = require('path');
@@ -13,16 +13,16 @@ const filename = process.argv.filter(x => x.startsWith('--env.filename='))[0].sp
 
 module.exports = {
     entry: {
-        index: ['react', 'react-dom', 'redux'],
+        index: [{libs}],
     },
     output: {
         path: path.join(__dirname, 'build'),
         filename: filename + '.js',
-        library: 'ReactReduxBundle',
+        library: '{var-name}',
     },
     plugins: [
         new webpack.DllPlugin({
-            name: 'ReactReduxBundle',
+            name: '{var-name}',
             path: 'build/' + filename + '.manifest.json',
         }),
     ],
@@ -80,7 +80,7 @@ export class Bundle {
     }
 
     getBundleHash(): string {
-        return md5(this.libraries.map(x => x.name + '@' + x.version).reduce((x, y) => x + ':' + y));
+        return md5(this.libraries.map(x => x.name + "@" + x.version).reduce((x, y) => x + ":" + y));
     }
 
     getLibraryVersions(): { [library: string]: string } {
@@ -97,19 +97,25 @@ export class Bundle {
 
     getResultFileNames(): Array<string> {
         return [
-            this.getBundleHash() + '.js',
-            this.getBundleHash() + '.manifest.json',
-            this.getBundleHash() + '.versions.json',
+            this.getBundleHash() + ".js",
+            this.getBundleHash() + ".manifest.json",
+            this.getBundleHash() + ".versions.json",
         ];
     }
 
+    getWebpackConfigTemplate(): string {
+        return webpackConfigTemplate
+            .replace("{libs}", this.libraries.map(x => `'${x.name}'`).join(", "))
+            .replace("{var-name}", this.getBundleHash());
+    }
+
     build(directory: string, packageManager: PackageManager): BundleBuildResult {
-        fs.writeFileSync(path.join(directory, 'webpack.config.js'), webpackConfigTemplate);
-        packageManager.runScript('build', '--env.filename=' + this.getBundleHash());
+        fs.writeFileSync(path.join(directory, "webpack.config.js"), this.getWebpackConfigTemplate());
+        packageManager.runScript("build", "--env.filename=" + this.getBundleHash());
         fs.writeFileSync(
-            path.join(directory, 'build', this.getBundleHash() + '.versions.json'),
-            JSON.stringify(this.getLibraryVersions(), null, '  ')
+            path.join(directory, "build", this.getBundleHash() + ".versions.json"),
+            JSON.stringify(this.getLibraryVersions(), null, "  ")
         );
-        return new BundleBuildResult(path.join(directory, 'build'), this.getResultFileNames());
+        return new BundleBuildResult(path.join(directory, "build"), this.getResultFileNames());
     }
 }

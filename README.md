@@ -14,7 +14,7 @@ module.exports = {
     /* ... */
     plugins: [
         new KonturCdnPlugin({
-            bundles: ['react--react-dom--redux'],
+            libs: ['react', 'react-dom', 'babel-polyfill'],
             cdn: "https://kontur-cdn.github.io",
         }),
     ]
