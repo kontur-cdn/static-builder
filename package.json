@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel src --out-dir dist --source-maps",
     "start": "babel-node ./src/index.js",
-    "lint": "eslint src --ext .js,.jsx --report-unused-disable-directives"
+    "lint": "eslint src interfaces packages --ext .js,.jsx,.js.flow --report-unused-disable-directives"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",

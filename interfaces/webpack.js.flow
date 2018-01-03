@@ -1,29 +1,29 @@
 // @flow
 
-declare module 'webpack' {
+declare module "webpack" {
     declare var x: any;
-    
+
     declare export type WebpackCompiler = any;
-    
+
     declare export type Manifest = {
         name: string,
         content: { [path: string]: mixed },
     };
 
-    declare export default x;
+    declare export default x
 }
 
-declare module 'html-webpack-include-assets-plugin' {
+declare module "html-webpack-include-assets-plugin" {
     declare var x: any;
-    declare export default x;
+    declare export default x
 }
 
-declare module 'node-fetch' {
+declare module "node-fetch" {
     declare var x: any;
-    declare export default x;
+    declare export default x
 }
 
-declare module 'sync-request' {
+declare module "sync-request" {
     declare var x: any;
-    declare export default x;
+    declare export default x
 }

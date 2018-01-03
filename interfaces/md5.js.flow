@@ -1,4 +1,5 @@
 // @flow
+
 declare module "md5" {
     declare export default function md5(value: string): string;
 }
