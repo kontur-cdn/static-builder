@@ -1,7 +1,7 @@
 // @flow
 
 export default {
-    ["react--react-dom--redux"]: [
+    ["react-react-dom-redux"]: [
         {
             react: "15.6.0",
             "react-dom": "15.6.0",

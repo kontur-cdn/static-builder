@@ -1,6 +1,5 @@
 // @flow
 import webpack, { type WebpackCompiler } from "webpack";
-import HtmlWebpackIncludeAssetsPlugin from "html-webpack-include-assets-plugin";
 import { KonturCdnPluginWebpackImpl, type KonturCdnPluginOptions } from "./KonturCdnPluginWebpackImpl";
 
 export default class KonturCdnPluginWebpack1 {
@@ -21,29 +20,7 @@ export default class KonturCdnPluginWebpack1 {
                     manifest: bundleInfo.manifest,
                 })
             );
-            this.applyHtmlWebpackPlugin(compiler, assets);
+            this.impl.injectAssets(compiler, assets);
         }
-    }
-
-    applyHtmlWebpackPlugin(compiler: WebpackCompiler, modulesFromCdn: { [name: string]: string }) {
-        const includeAssetsPlugin = new HtmlWebpackIncludeAssetsPlugin({
-            assets: [],
-            publicPath: "",
-            append: false,
-        });
-
-        includeAssetsPlugin.apply(compiler);
-
-        compiler.plugin("after-compile", (compilation, cb) => {
-            const assets = Object.keys(modulesFromCdn).map(key => modulesFromCdn[key]);
-
-            includeAssetsPlugin.constructor({
-                assets,
-                publicPath: "",
-                append: false,
-            });
-
-            cb();
-        });
     }
 }

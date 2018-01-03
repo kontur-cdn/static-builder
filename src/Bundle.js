@@ -18,7 +18,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'build'),
         filename: filename + '.js',
-        library: '{var-name}',
+        library: '_{var-name}',
     },
     plugins: [
         new webpack.DllPlugin({
